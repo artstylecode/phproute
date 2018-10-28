@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<title>
+			用户列表
+		</title>
+		<style type="text/css">
+			ul,li{list-style: none;}
+		</style>
+	</head>
+	<body>
+		<ul>
+			{% for item in users %}
+				
+			
+			<li><label>用户名：{{item.name}}</label><label>年龄：{{item.age}}</label></li>
+		{% endfor %}
+		</ul>
+
+	</body>
+</html>

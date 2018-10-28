@@ -1,6 +1,4 @@
-<?php 
-
-	require "../vendor/autoload.php";
-	$app = Application::getInstance();
-	$app ->run();
- ?>
+<?php 	require "../vendor/autoload.php";
+		use route\core\BaseInjection;
+		$app = \Application::getInstance([]);
+		$app ->run();

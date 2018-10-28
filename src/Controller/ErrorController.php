@@ -3,19 +3,11 @@
 	/**
 	 * 
 	 */
-	class ErrorController
+	class ErrorController extends Controller
 	{
-		public function actionNotFound($controller, $action)
+		public function NotFound($controller, $action)
 		{
-			return "<<!DOCTYPE html>
-			<html>
-			<head>
-				<title>page not found</title>
-			</head>
-			<body>
-				<h2>not found page controller:$controller action:$action</h2>
-			</body>
-			</html>";
+			return $this->render("error/notfound", ["list" =>["1","2","3"]]);
 		}
 	}
  ?>

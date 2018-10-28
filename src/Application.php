@@ -1,24 +1,53 @@
 <?php 
-	namespace app;
-	class Application
+	use route\controller\ErrorController;
+	use route\core\BaseInjection;
+	use route\event\EventManager;
+	use route\event\DefaultEventHandler;
+	class Application extends BaseInjection
 	{
-		
+		public $eventManager;
+
+		public  function get_called_class()
+		{
+			return __CLASS__;
+		}
+		public function __construct()
+		{
+			//执行父类构造函数进行依赖注入
+			parent::__construct();
+			$this->init();
+		}
+		public function init()
+		{
+			//添加事件监听
+			if($this-> eventManager)
+			{
+				$this->eventManager->addListener(EventManager::EVENT_APPINIT,
+					new DefaultEventHandler());
+				$this->eventManager->addListener(EventManager::EVENT_ACTIONSTART,
+					new DefaultEventHandler());
+				$this->eventManager->addListener(EventManager::EVENT_ACTIONEND,
+					new DefaultEventHandler());
+				$this->eventManager->addListener(EventManager::EVENT_APPEND,
+					new DefaultEventHandler());
+				//派遣程序初始化事件
+				$this->eventManager->dispatch(EventManager::EVENT_APPEND);
+			}
+		}
+
 		private static $Instance;
-		const ROUTEPARAMNAME="r";
+		const ROUTEPARAMNAME="t";
 		const NAMESPACEPREFIX="route\controller\\";
 		public static $App;
-
-		private __construct($config)
-		{
-
-		}
+		public static $baseDir;		
 
 		public function getInstance($config)
 		{
-			echo "getInstance";
+			
 			if(!isset(self::$Instance))
 			{
-				self::$Instance = new self($config);
+				self::$baseDir = dirname(__FILE__);
+				self::$Instance = new self();
 			}
 			return self::$Instance;
 		}
@@ -34,44 +63,56 @@
 		 */
 		public function run()
 		{
-			var_dump($_GET);die;
+			
 			self::$App = $this;
 			$routeInfoStr = $_GET[self::ROUTEPARAMNAME];
-
+			$this->Param();
 			$html = "none";
 
-			if(!isset($controller)||!isset($action))
+			if(!isset($routeInfoStr))
 			{
 				$html = $this->redirectToNotFound();
 			}else
 			{
-				$classInfo = $this->getClassInfo();
-				$fullClass = self::NAMESPACEPREFIX.$classInfo["class"];
-				echo "class:".$fullClass;
-				$ref = new ReflectionClass($fullClass);
-				$instance = $ref ->getInstance();
-				$method = $instance ->getMethod();
-				if(!isset($instance)||!isset($method))
+				$classInfo = $this->getClassInfo($routeInfoStr);
+				$fullClass = self::NAMESPACEPREFIX.$classInfo["class"]."Controller";
+				$ref = new \ReflectionClass($fullClass);
+				if($ref)
 				{
-					$html = $this->redirectToNotFound();
-				}else
-				{
-					$methodParam = array();
-					$arguments = $method -> getParameters();
-					foreach ($arguments as $argname=> $arg) {
-						if(isset($this->param[$argname]))
-						{
-							$methodParam[$argname] = $arg;
+					$instance = $ref ->newInstance();
+					$method = $ref ->getMethod($classInfo["method"]);
+					if(!isset($instance)||!isset($method))
+					{
+						$html = $this->redirectToNotFound();
+					}else
+					{
+						$methodParam = array();
+						$arguments = $method -> getParameters();
+						foreach ($arguments as $arg) {
+							$argname = $arg ->name;
+
+							if(isset($this->param[$argname]))
+							{
+								$methodParam[$argname] = $this->param[$argname];
+							}
 						}
+						//派遣action开始处理事件
+						$this->eventManager->dispatch(EventManager::EVENT_ACTIONSTART);
+						$html = $method -> invokeArgs($instance, $methodParam);
+						//派遣action处理完毕事件
+						$this->eventManager->dispatch(EventManager::EVENT_ACTIONEND);
 					}
-					$html = $method -> invokeArgs($instance, $methodParam);
 				}
+				//派遣action处理完毕事件
+				$this->eventManager->dispatch(EventManager::EVENT_APPEND);
+				
 			}
 			echo $html;	
 		}
 		public function redirectToNotFound()
 		{
-			# code...
+			$con = new ErrorController();
+			return $con ->NotFound("con","act");
 		}
 		public function Post($name=null,$defval=null)
 		{

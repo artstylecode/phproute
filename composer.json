@@ -3,8 +3,18 @@
 	"autoload":{
 		"psr-4":
 		{
-			"app\\":"src/",
-			"route\\controller\\":"src/Controller"
+			"route\\core\\":"src/core/",
+			"route\\render\\":"src/render/",
+			"route\\event\\":"src/event/",
+			"":"src/",
+			"route\\controller\\":"src/controller/"
 		}
+	},
+	"require":
+	{
+		"twig/twig":"*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*"
 	}
 }
