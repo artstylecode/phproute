@@ -13,7 +13,7 @@
 		public function __construct($config)
 		{
 			$srcDir = \Application::$baseDir;
-			$loader = new \Twig_Loader_Filesystem($srcDir.'/views');
+			$loader = new \Twig_Loader_Filesystem($srcDir.'/'.$config["root"]);
 			$this->twig = new \Twig_Environment($loader, array(
 			    'cache' => $srcDir.'/cache',
 			    'debug' => true

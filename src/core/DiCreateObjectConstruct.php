@@ -18,7 +18,7 @@
 			$instance = null;
 			if(isset($this ->classname))
 			{
-				$reflectionInfo = ReflectionUtils::getInstance($this ->classname, $config);
+				$reflectionInfo = ReflectionUtils::getInstance($this ->classname, $this->config);
 				$instance = $reflectionInfo? $reflectionInfo["instance"]:null;
 			}else
 			{

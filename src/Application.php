@@ -31,7 +31,7 @@
 				$this->eventManager->addListener(EventManager::EVENT_APPEND,
 					new DefaultEventHandler());
 				//派遣程序初始化事件
-				$this->eventManager->dispatch(EventManager::EVENT_APPEND);
+				$this->eventManager->dispatch(EventManager::EVENT_APPINIT);
 			}
 		}
 
@@ -41,7 +41,7 @@
 		public static $App;
 		public static $baseDir;		
 
-		public function getInstance($config)
+		public static function getInstance($config)
 		{
 			
 			if(!isset(self::$Instance))

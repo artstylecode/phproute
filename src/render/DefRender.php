@@ -12,8 +12,7 @@
 
 		public function __construct($config)
 		{
-			$this->rootPath  = $config["root"];
-			self::$baseDir = \Application::$baseDir;
+			$this->boot($config);
 		}
 
 		/**

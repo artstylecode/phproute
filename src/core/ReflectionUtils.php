@@ -65,7 +65,7 @@
 				return false;
 		}
 
-		public function getReflectionInfo($class)
+		public static function getReflectionInfo($class)
 		{
 			$ref = new \ReflectionClass($class);
 			return $ref;

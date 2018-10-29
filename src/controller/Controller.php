@@ -9,14 +9,11 @@
 		{
 			
 			public $_Render;
-			private function __construct()
+			public function __construct()
 			{
 				parent::__construct();
 				
-				if(isset($this-> _Render))
-				{
-					$this-> _Render -> boot($this->_config);
-				}
+				
 					
 			}
 			protected function render($viename, $params)
