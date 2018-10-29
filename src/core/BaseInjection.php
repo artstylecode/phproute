@@ -3,7 +3,7 @@
 	 /**
 	 * 依赖注入组件基础类
 	 */
-	abstract class  BaseInjection implements \ArrayAccess
+	abstract class  BaseInjection
 	{
 		protected $_config;
 		public  function __construct()
@@ -31,23 +31,6 @@
 		public function get_called_class()
 		{
 
-		}
-
-		public function offsetExists ($offset )
-		{
-			return isset($this->$offset);
-		}
-		public function offsetGet (  $offset )
-		{
-			return $this->$offset;
-		}
-		public function offsetSet (  $offset ,  $value )
-		{
-			$this->$offset = $value;
-		}
-		public function offsetUnset (  $offset )
-		{
-			unset($this->$offset);
 		}
 	}
  ?>
