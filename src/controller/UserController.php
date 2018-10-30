@@ -21,5 +21,11 @@
 				$list[] = ["name" => "user3", "age" => 16];
 				return $this->render("user/list", ["users" => $list]);
 			}
+
+			public function test()
+			{
+				$list = array('user' => 12,'user2'=>13 );
+				return $this->jsonRender($list);
+			}
 		}
 ?>

@@ -65,8 +65,12 @@
 		{
 			
 			self::$App = $this;
-			$routeInfoStr = $_GET[self::ROUTEPARAMNAME];
+			$paramKeys = array_keys($_GET);
+			$infokey = array_pop($paramKeys);
+			$infokey = substr($infokey,1);
+			$routeInfoStr = isset($_GET[self::ROUTEPARAMNAME])?$_GET[self::ROUTEPARAMNAME]:$infokey;
 			$this->Param();
+
 			$html = "none";
 
 			if(!isset($routeInfoStr))

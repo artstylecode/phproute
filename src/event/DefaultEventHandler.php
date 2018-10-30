@@ -12,7 +12,7 @@
 		 */
 		public function dispatch($eventname)
 		{
-			echo "</br>current event:$eventname";
+			//echo "</br>current event:$eventname";
 		}
 	}
  ?>

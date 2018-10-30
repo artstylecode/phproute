@@ -17,7 +17,6 @@
 			{
 				self::$instance = new self();
 			}
-			var_dump(self::$instance);
 			return self::$instance;
 		}
 		private function __construct()
