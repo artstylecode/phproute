@@ -3,12 +3,12 @@
     "type": "library",
     "description": "0mvc,sample route impl",
     "keywords": ["route"],
-    "homepage": "http://www.artcoding.com",
+    "homepage": "http://www.artcoding.net",
     "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "wangzs",
-            "email": "artcoding@163c.com",
+            "email": "artcoding@163.com",
             "homepage": "none",
             "role": "Developer"
         }],
