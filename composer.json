@@ -1,9 +1,9 @@
 {
 	"name": "artcoding/route",
     "type": "library",
-    "description": "mvc,sample route impl",
+    "description": "0mvc,sample route impl",
     "keywords": ["route"],
-    "homepage": "https://twig.symfony.com",
+    "homepage": "http://www.artcoding.com",
     "license": "BSD-3-Clause",
     "authors": [
         {
