@@ -1,4 +1,17 @@
 {
+	"name": "php/route",
+    "type": "library",
+    "description": "mvc,sample route impl",
+    "keywords": ["route"],
+    "homepage": "https://twig.symfony.com",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "wangzs",
+            "email": "artcoding@163c.com",
+            "homepage": "none",
+            "role": "Developer"
+        }],
 
 	"autoload":{
 		"psr-4":
@@ -12,7 +25,8 @@
 	},
 	"require":
 	{
-		"twig/twig":"*"
+		"twig/twig":"*",
+		"doctrine/orm":"*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*"
