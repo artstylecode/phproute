@@ -18,7 +18,10 @@
 		{
 			"route\\core\\":"src/core/",
 			"route\\render\\":"src/render/",
-			"route\\event\\":"src/event/",
+			"route\\event\\":"src/event/"			
+		},
+		"psr-0":
+		{
 			"":"src/",
 			"route\\controller\\":"src/controller/"
 		}
